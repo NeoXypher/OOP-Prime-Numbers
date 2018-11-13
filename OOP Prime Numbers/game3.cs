@@ -8,9 +8,9 @@ namespace OOP_Prime_Numbers
 {
 	class game3
 	{
-		public static void Main()
+		public static void Task4()
 		{
-			char playerGuess;
+			int playerGuess;
 			int score = 0;
 			int generatedNumber;
 			bool Correct = true;
@@ -20,27 +20,27 @@ namespace OOP_Prime_Numbers
 				generatedNumber = rnd.Next(1, 1001);
 				Console.WriteLine(generatedNumber);
 
-				Console.WriteLine("Is this number divisible by 3? Y/N");
-				playerGuess = Convert.ToChar(Console.ReadLine());
+				Console.WriteLine("Is this number divisible by 3, 5 or 7? (If none enter 1)");
+				playerGuess = Convert.ToInt32(Console.ReadLine());
 
 				scoreCalaculator(playerGuess, generatedNumber, ref Correct);
 
-				scoreCompare(ref score, Correct);
-			} while (score < 6 || score > 0);
+				scoreCompare(ref score, Correct, playerGuess);
+			} while (score < 60 || score > 0);
 
-			if (score >= 6)
+			if (score >= 60)
 				Console.WriteLine("You Win!");
 			else
 				Console.WriteLine("You Lose!");
 			Console.ReadLine();
 		}
 
-		public static void scoreCompare(ref int score, bool Correct)
+		public static void scoreCompare(ref int score, bool Correct, int playerGuess)
 		{
 			if (Correct)
 			{
 				Console.WriteLine("You guessed correctly!");
-				score += 3;
+				score += playerGuess;
 			}
 			else
 			{
@@ -48,12 +48,15 @@ namespace OOP_Prime_Numbers
 				score -= 3;
 			}
 				
-		}		public static void scoreCalaculator(char playerGuess, int generatedNumber, ref bool Correct)
+		}
+
+		public static void scoreCalaculator(int playerGuess, int generatedNumber, ref bool Correct)
 		{
-			if ((generatedNumber % 3 == 0 && playerGuess == Convert.ToChar("Y")) || (generatedNumber % 3 != 0 && playerGuess == Convert.ToChar("N")))
+			if ((generatedNumber % playerGuess == 0) && playerGuess != 1)
 				Correct = true;
 			else
 				Correct = false;
-		}
+		}
+
 	}
 }
